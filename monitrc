@@ -1,0 +1,15 @@
+set init
+set daemon 1
+
+CHECK PROCESS foo-service  with pidfile /opt/service/foo/foo.pid
+ depends on bar-service
+ start program = "/opt/service/foo/startFooService.sh"
+ stop program = "/opt/service/foo/stopFooService.sh"
+  as uid "foo" and gid "foo"
+   if not exist then restart
+
+CHECK PROCESS bar-service  with pidfile /opt/service/bar/bar.pid
+ start program = "/opt/service/bar/startBarService.sh"
+ stop program = "/opt/service/bar/stopBarService.sh"
+  as uid "foo" and gid "foo"
+   if not exist then restart
