@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start Monit
-monit -c /etc/monitrc
+monit -I -c /etc/monitrc &
 
 # this infinite loop will keep script running forever
 while [ 1 ] ; do

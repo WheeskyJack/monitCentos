@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-logFile=/opt/service/bar/logs/stopFooServicelog
+logFile=/opt/service/bar/logs/stopBarServicelog
 logmsg()
 {
 	echo -e "`date \"+%y/%m/%d %H:%M:%S\"`: $1 " >> $logFile

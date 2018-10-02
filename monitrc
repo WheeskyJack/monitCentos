@@ -1,15 +1,24 @@
 set init
 set daemon 1
+    with start delay 5
+set httpd
+     port 2812
+     use address 127.0.0.1
+     allow 127.0.0.1
+set log /etc/monit.d/logs
+set statefile /etc/monit.d/.monit.state
 
-CHECK PROCESS foo-service  with pidfile /opt/service/foo/foo.pid
- depends on bar-service
+CHECK PROCESS fooservice  with pidfile /opt/service/foo/foo.pid
+ depends on barservice
  start program = "/opt/service/foo/startFooService.sh"
+  as uid "foo" and gid "foo"
  stop program = "/opt/service/foo/stopFooService.sh"
   as uid "foo" and gid "foo"
    if not exist then restart
 
-CHECK PROCESS bar-service  with pidfile /opt/service/bar/bar.pid
+CHECK PROCESS barservice  with pidfile /opt/service/bar/bar.pid
  start program = "/opt/service/bar/startBarService.sh"
+  as uid "foo" and gid "foo"
  stop program = "/opt/service/bar/stopBarService.sh"
   as uid "foo" and gid "foo"
    if not exist then restart
